@@ -1,0 +1,83 @@
+
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons left>
+            <button ion-button icon-only (click)="back_action();" >
+              <ion-icon  color="primary" name='arrow-round-back'></ion-icon>
+            </button>
+          </ion-buttons>
+      <ion-title>Comprobantes</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding scroll="false" >
+    <ion-item>
+        <ion-label color="primary" ><b>Periodo</b></ion-label>
+        <ion-datetime displayFormat="MMMM YYYY"  max="{{this.year}}"
+        [(ngModel)]="periodo"
+        (ionChange)="resumenPago()"
+        monthNames="{{this.meses}}" ></ion-datetime>
+    </ion-item>
+
+    <ion-list  scroll="true">
+        <ion-item-divider color="light">
+            <ion-label>
+                Resumen de pagos
+            </ion-label>
+        </ion-item-divider>
+            <ion-item-sliding    #slidingItem *ngFor="let item of this.comps; let indice=index">
+              <ion-item detail="true" lines="full" #ite (click)="openOption(slidingItem, ite)" >
+                  <ion-label *ngIf="item[0] != undefined"  text-wrap>
+                      <h2 color="primary" >COMPAÑIA</h2>
+                      <p>{{item[0].COMPANIA}}</p>
+                      <h2 color="primary">PERIODO</h2>
+                      <p>{{item[0].inicio}} al {{item[0].fin}}</p>
+                  </ion-label>
+              </ion-item>
+              <ion-item-options side="end">
+                <button ion-button color="light" (click)="email_comp(item[0].numero)"  >
+                  <ion-icon name="mail"></ion-icon>
+                  Correo
+                </button>
+                <button ion-button color="primary" (click)="descargaPdf(item[0].numero)" >
+                  <ion-icon name="cloud-download"></ion-icon>
+                  Descargar
+                </button>
+                <!--<button ion-button color="light" (click)="presentModal(indice)"  >Ver</button>-->
+              </ion-item-options>
+            </ion-item-sliding>
+          <ion-item-divider color="light">
+              <ion-label>
+                  Retencion en la fuente
+              </ion-label>
+          </ion-item-divider>
+          <ion-item-sliding  #slidingItem *ngFor="let item of this.retns; let indice=index">
+              <ion-item detail="true" lines="full" #ite (click)="openOption(slidingItem, ite)">
+                  <ion-label text-wrap>
+                      <h2 color="primary">COMPAÑIA</h2>
+                      <p>{{item.COMPANIA}}</p>
+                      <h2 color="primary">PERIODO</h2>
+                      <p>{{item.inicio}} al {{item.fin}}</p>
+                  </ion-label>
+              </ion-item>
+              <ion-item-options side="end">
+                <button ion-button color="light"  (click)="retencion_comp(indice)" >
+                  <ion-icon name="mail"></ion-icon>
+                  Correo
+                </button>
+                <button ion-button color="primary" (click)="descargaPdfrtn(indice)" >
+                  <ion-icon name="cloud-download"></ion-icon>
+                  Descargar
+                </button>
+              </ion-item-options>
+            </ion-item-sliding>
+    </ion-list>
+</ion-content>
+<ion-footer [hidden]="true" >
+    <ion-toolbar>
+        <ion-segment color="primary" >
+            <ion-segment-button value="laboral" (click)="resumenPago()" >
+                Resumen de pago y retencion FTE
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+  </ion-footer>

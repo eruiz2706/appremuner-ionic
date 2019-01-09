@@ -1,0 +1,87 @@
+<!--
+  Generated template for the SolicitudPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="back_action();">
+        <ion-icon color="primary" name='arrow-round-back'></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Solicitudes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-label>Solicitud</ion-label>
+      </ion-col>
+      <ion-col  align="rigth" style="border-bottom: .01em solid #dcdcdc">
+        <ion-select (ionChange)="cambioSoltd();" [(ngModel)]="ngsol" interface="popover" placeholder="Seleccione uno" interface="alert" >
+          <ion-option *ngFor="let item of this.solicituds"  value="{{item.COD_SOLICITUD}}"  >{{item.DESC_SOLICITUD}}</ion-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>Tipo Solicitud</ion-label>
+      </ion-col>
+      <ion-col style="border-bottom: .01em solid #dcdcdc">
+        <ion-select  (ionChange)="verificarSolicitud()" [(ngModel)]="ngsub" placeholder="Seleccione uno" interface="alert">
+            <ion-option  *ngFor="let it of this.subtipo" value="{{it.COD_TIPO_SOLI}}" >{{it.DESC_TIPO_SOLI}}</ion-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>Numero de dias</ion-label>
+      </ion-col>
+      <ion-col style="border-bottom: .01em solid #dcdcdc">
+        <ion-input  [(ngModel)]="numDias" type="number"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>Fecha inicio</ion-label>
+      </ion-col>
+      <ion-col style="border-bottom: .01em solid #dcdcdc">
+          <ion-datetime (ionChange)="verificarSolicitud()" display-format="DD/MM/YYYY" picker-format="DD/MM/YYYY"  [(ngModel)]="fechaini" doneText="Ok" cancelText="Cancelar"  >
+          </ion-datetime>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label>Fecha fin</ion-label>
+      </ion-col>
+      <ion-col style="border-bottom: .01em solid #dcdcdc">
+          <ion-datetime [disabled]="true" display-format="DD/MM/YYYY" picker-format="DD/MM/YYYY"  [(ngModel)]="fechafin" doneText="Ok" cancelText="Cancelar"  >
+          </ion-datetime>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="!this.verificado" >
+        <ion-col align="center">
+          <button ion-button (click)="verificarSolicitud();" >
+            Verificar fecha de finalizacion
+          </button>
+        </ion-col>
+    </ion-row>
+    <ion-row *ngIf="this.verificado" >
+      <ion-col align="center">
+        <button ion-button value="laboral" (click)="aprobar();">
+          Aprobar
+        </button>
+      </ion-col>
+      <ion-col align="center">
+        <button ion-button value="cancelar" (click)="cancelar();" >
+          Cancelar
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

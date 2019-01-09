@@ -1,0 +1,42 @@
+<!--
+  Generated template for the UsuarioPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>usuario</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <ion-list-header color="primary">
+          <h5>
+            Datos de sesión
+          </h5>
+        </ion-list-header>
+      <ion-item lines="full">
+          <ion-label text-wrap>
+              <h2>Nombre</h2>
+              <p color="primary" >{{ this.usr == undefined ? "" : this.usr.user.nombre}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="full" >
+            <ion-label text-wrap>
+                <h2>Correo Electronico</h2>
+                <p color="primary" >{{this.usr == undefined ? "" : this.usr.user.correo}}</p>
+            </ion-label>
+        </ion-item>
+        <ion-item lines="full">
+            <ion-label text-wrap>
+                <h2>Codigo</h2>
+                <p color="primary" >{{this.usr == undefined ? "" : this.usr.user.codigo}}</p>
+            </ion-label>
+        </ion-item>
+      </ion-list>
+</ion-content>

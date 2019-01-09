@@ -1,0 +1,123 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button menuToggle icon-only>
+        <ion-icon  color="primary" name='menu'></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title  align="center" justify-content-center align-items-center >REMUNER</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="this.userDetail()">
+        <ion-icon  color="primary" name="person" ></ion-icon>
+        <p *ngIf="!this.detusr" >Login</p>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-menu  [content]="content" >
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Opciones</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-list color="primary" lines>
+            <ion-card  style=" box-shadow: 0px 0px 0px 0px #fff; padding: 20px;" justify-content-center align-items-center align="center" >
+                <img style="margin:auto; width:70%; padding:5px; "
+                src="../../assets/unnamed.png">
+                <ion-card-content>
+                <ion-card-title>
+                   0.0.1
+                </ion-card-title>
+                <p>
+                    REMUNER-APP
+                </p>
+                </ion-card-content>
+            </ion-card>
+            <div *ngIf="this.detusr" >
+                <ion-item  (click)="this.comprobante()"  >
+                    <ion-icon name="list-box" item-start color="primary"></ion-icon>
+                    <ion-label color="primary">Comprobante</ion-label>
+                    <ion-icon name="arrow-dropright" item-end color="primary"></ion-icon>
+                </ion-item>
+                <ion-item (click)="this.certificado()" >
+                    <ion-icon name="checkmark-circle-outline" item-start color="primary"></ion-icon>
+                    <ion-label color="primary">Certificados</ion-label>
+                    <ion-icon name="arrow-dropright" item-end color="primary"></ion-icon>
+                </ion-item>
+                <ion-item  (click)="this.solicitud()" >
+                    <ion-icon name="filing" item-start  color="primary"></ion-icon>
+                    <ion-label color="primary">Solicitudes</ion-label>
+                    <ion-icon name="arrow-dropright" item-end color="primary"></ion-icon>
+                </ion-item>
+                <ion-item (click)="this.educacion()" >
+                    <ion-icon name="school" item-start color="primary"></ion-icon>
+                    <ion-label color="primary">Educacion</ion-label>
+                    <ion-icon name="arrow-dropright" item-end color="primary"></ion-icon>
+                </ion-item>
+                <ion-item  (click)="this.borrarSesion()" >
+                    <ion-icon name="log-out" item-start color="primary"></ion-icon>
+                    <ion-label color="primary">Cerrar sesion</ion-label>
+                    <ion-icon name="arrow-dropright" item-end color="primary"></ion-icon>
+                </ion-item>
+            </div>
+        </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-nav id="nav" #content [root]="rootPage"></ion-nav>
+<ion-content padding scroll="false">
+    <ion-grid style=" min-height: 90%;">
+
+          <ion-row  justify-content-center align-items-center>
+              <img height="200" src="../../assets/main.png">
+          </ion-row>
+
+        <ion-row >
+            <ion-col col-6>
+                <div class="round-button" align="center"  (click)="this.comprobante()">
+
+                  <div class="round-button-circle">
+                    <ion-icon class="icon_menu" name="list-box" color="light"></ion-icon>
+                    <!-- <a class="round-button">Comprobante</a>-->
+                  </div>
+                </div>
+                <h2 class="texto_item">Comprobante</h2>
+            </ion-col>
+            <ion-col col-6>
+                <div class="round-button" align="center" (click)="this.certificado()">
+
+                    <div class="round-button-circle">
+                        <ion-icon class="icon_menu" name="checkmark-circle-outline" color="light"></ion-icon>
+                      <!-- <a class="round-button">Certificados</a>-->
+                    </div>
+                  </div>
+                  <h2 class="texto_item">Certificados</h2>
+            </ion-col>
+        </ion-row>
+        <ion-row >
+            <ion-col col-6 >
+                <div class="round-button" align="center" (click)="this.solicitud()">
+
+                    <div class="round-button-circle">
+                        <ion-icon class="icon_menu" name="filing" color="light"></ion-icon>
+                      <!-- <a class="round-button">Solicitudes</a>-->
+                    </div>
+                  </div>
+                  <h2 class="texto_item">Solicitudes</h2>
+            </ion-col>
+            <ion-col col-6>
+
+                <div class="round-button" align="center" (click)="this.educacion()">
+
+                    <div class="round-button-circle">
+                        <ion-icon class="icon_menu" name="school" color="light"></ion-icon>
+                     <!-- <a class="round-button">Educacion</a>-->
+                    </div>
+                </div>
+                <h2 class="texto_item">Educacion</h2>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+</ion-content>

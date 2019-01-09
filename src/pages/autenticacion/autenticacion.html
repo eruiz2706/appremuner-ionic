@@ -1,0 +1,52 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons left>
+            <button ion-button icon-only (click)="back_action();" >
+              <ion-icon  color="primary" name='arrow-round-back'></ion-icon>
+            </button>
+          </ion-buttons>
+      <ion-title>Autenticacion</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content padding>
+
+      <ion-list>
+
+          <ion-list-header color="primary">
+              Datos personales
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Cedula</ion-label>
+            <ion-input type="number" [(ngModel)]="documento" ></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label>Correo</ion-label>
+              <ion-input type="email" [(ngModel)]="email"  ></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label>Fecha Nacimiento</ion-label>
+              <ion-datetime display-format="DD/MM/YYYY" picker-format="DD/MM/YYYY"  [(ngModel)]="fecha" doneText="Ok" cancelText="Cancelar"  >
+              </ion-datetime>
+          </ion-item>
+          <p align="center" *ngIf="!this.preg">
+             <button ion-button color="light" (click)="this.solicitarPreguntas();" >Solicitar Preguntas</button>
+          </p>
+          <ion-list-header color="primary" *ngIf="this.preg" >
+              Preguntas de verificacion
+          </ion-list-header>
+          <div *ngIf="this.preg" >
+            <ion-item *ngFor="let pr of this.tmp.preg; let indice=index" text-wrap >
+              <ion-label>{{pr.NOMBRE}}</ion-label>
+              <ion-select  [(ngModel)]="this.tmp.preg[indice].resp" placeholder="Seleccione uno">
+                <ion-option text-wrap *ngFor="let item of this.tmp.resp[indice] "  value="{{item.VALOR}}">{{item.NOMBRE}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <p align="center" *ngIf="this.preg">
+                <button ion-button color="light" (click)="this.verificar();" >Verificar</button>
+             </p>
+          </div>
+        </ion-list>
+
+  </ion-content>

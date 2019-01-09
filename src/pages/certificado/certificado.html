@@ -1,0 +1,55 @@
+
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons left>
+          <button ion-button icon-only (click)="back_action();" >
+            <ion-icon  color="primary" name='arrow-round-back'></ion-icon>
+          </button>
+        </ion-buttons>
+    <ion-title>Certificados</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding scroll="false" >
+  <ion-item>
+      <ion-label color="primary" ><b>Periodo</b></ion-label>
+      <ion-datetime displayFormat="MMMM YYYY"  max="{{this.year}}"
+      [(ngModel)]="periodo"
+      (ionChange)="tipoCertificados()"
+      monthNames="{{this.meses}}" ></ion-datetime>
+  </ion-item>
+  <ion-list  scroll="true">
+    <ion-item-divider color="light">
+        <ion-label text-wrap>
+            Certificados disponibles para el perido.
+        </ion-label>
+    </ion-item-divider>
+        <ion-item-sliding    #slidingItem *ngFor="let item of this.comps; let indice=index">
+          <ion-item detail="true" lines="full" #ite (click)="openOption(slidingItem, ite)" >
+              <ion-label  text-wrap>
+                  <h2 color="primary" >Nombre</h2>
+                  <p>{{item.NOMBRE_CERTIFICADO}}</p>
+              </ion-label>
+          </ion-item>
+          <ion-item-options side="end">
+            <button ion-button color="light"  (click)="certificado_email(item.CODIGO_CERTIFICADO,item.NOMBRE_CERTIFICADO)" >
+              <ion-icon name="mail"></ion-icon>
+              Correo
+            </button>
+            <button ion-button color="primary" (click)="descargaPdf(item.CODIGO_CERTIFICADO)" >
+              <ion-icon name="cloud-download"></ion-icon>
+              Descargar
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+</ion-content>
+<ion-footer [hidden]="true">
+  <ion-toolbar>
+    <ion-segment color="primary">
+        <ion-segment-button value="laboral" (click)="tipoCertificados()" >
+          Actualizar listado
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+</ion-footer>
+

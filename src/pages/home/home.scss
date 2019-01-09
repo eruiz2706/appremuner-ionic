@@ -1,0 +1,59 @@
+page-home {
+
+ .round-button {
+  width:100%;
+  padding: 8%;
+}
+.round-button-circle {
+  width: 80%;
+  height:0;
+  padding-bottom: 80%;
+  border-radius: 50%;
+  border:1px solid #1061a2;
+  overflow:hidden;
+  background: #1061a2;
+  box-shadow: 0 0 4px gray;
+}
+
+.round-button a {
+  display:block;
+  float:center;
+  width:100%;
+  padding-top:50%;
+  padding-bottom:50%;
+  line-height:1em;
+  margin-top:-0.5em;
+  text-align:center;
+  color:#ffffff;
+  font-size:.8em;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+.icon_menu{
+  width:70%;
+  padding-top:50%;
+  padding-bottom:50%;
+  line-height:1em;
+  margin-top:-0.5em;
+  font-size:70px;
+}
+
+.texto_item {
+  width:100%!important;
+  margin:-5px auto;
+  text-align:center;
+  color:#1061a2;
+  font-size:.95em;
+  font-weight:700;
+  text-decoration:none;
+}
+
+.col_center {
+  align-items: center !important;
+  justify-content: right !important;
+}
+
+
+
+}
