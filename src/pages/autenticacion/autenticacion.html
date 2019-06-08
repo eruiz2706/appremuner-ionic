@@ -1,22 +1,22 @@
-<ion-header>
+<!-- ion-header>
     <ion-toolbar>
-        <ion-buttons left>
-            <button ion-button icon-only (click)="back_action();" >
-              <ion-icon  color="primary" name='arrow-round-back'></ion-icon>
-            </button>
-          </ion-buttons>
-      <ion-title>Autenticacion</ion-title>
+      <ion-title>Registrarse</ion-title>
     </ion-toolbar>
-  </ion-header>
+  </ion-header>-->
 
   <ion-content padding>
 
       <ion-list>
 
           <ion-list-header color="primary">
-              Datos personales
+              Formulario de registro
           </ion-list-header>
-
+          <ion-item >
+            <ion-label>Empresa</ion-label>
+            <ion-select  [(ngModel)]="empresa" placeholder="Seleccione">
+              <ion-option  *ngFor="let it of this.empresas" value="{{it.codigo}}" >{{it.nombre}}</ion-option>
+            </ion-select>
+          </ion-item>
           <ion-item>
             <ion-label>Cedula</ion-label>
             <ion-input type="number" [(ngModel)]="documento" ></ion-input>
@@ -44,9 +44,11 @@
               </ion-select>
             </ion-item>
             <p align="center" *ngIf="this.preg">
-                <button ion-button color="light" (click)="this.verificar();" >Verificar</button>
+                <button  ng-disabled="this.contador == 3" ion-button color="light" (click)="this.verificar();" >Verificar</button>
              </p>
           </div>
         </ion-list>
+        <ion-row style="height: 120px">
+        </ion-row>
 
   </ion-content>

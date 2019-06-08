@@ -73,10 +73,6 @@ export class ComprobantePage {
       .catch((error) =>
       {
         this.loading.dismiss();
-        //console.error('API Error : ', error.status);
-        if(error){
-
-        }
         this.presentAlert("Se presento un inconveniente al procesar tu solicitud.");
       });
   }

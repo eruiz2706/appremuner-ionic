@@ -23,7 +23,7 @@
       <ion-item lines="full">
           <ion-label text-wrap>
               <h2>Nombre</h2>
-              <p color="primary" >{{ this.usr == undefined ? "" : this.usr.user.nombre}}</p>
+              <p color="primary" >{{ this.usr == undefined ? "" : this.usr.user.Nombre +" "+ this.usr.user.Apellido }}</p>
           </ion-label>
         </ion-item>
         <ion-item lines="full" >
@@ -35,7 +35,7 @@
         <ion-item lines="full">
             <ion-label text-wrap>
                 <h2>Codigo</h2>
-                <p color="primary" >{{this.usr == undefined ? "" : this.usr.user.codigo}}</p>
+                <p color="primary" >{{this.usr == undefined ? "" : this.usr.user.ID}}</p>
             </ion-label>
         </ion-item>
       </ion-list>

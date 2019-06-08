@@ -2,13 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController, LoadingController } from 'ionic-angular';
 import { AuthServiceService } from '../auth-service.service';
 
-/**
- * Generated class for the AutenticacionPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-autenticacion',
@@ -19,11 +12,14 @@ export class AutenticacionPage {
   public fecha:any;// = new Date().toISOString();
   public usr:any;
   public tmp:any;
-  public documento:any = "";//31306051
-  public email:any     = "";//mireya.arcila@vibeconsulting.com.co
-  public preg:boolean  = false;
+  public documento:any    = "";
+  public email:any        = "";
+  public empresa:any      = "";
+  public empresas:any      = "";
+  public preg:boolean     = false;
   public resp:any;
   public loading:any;
+  public contador = 0;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -33,11 +29,12 @@ export class AutenticacionPage {
               public alert:AlertController,
               public loadingCtrl: LoadingController) {
                 this.usr = this.auth.getUser();
-                console.log(this.usr);
+                ////console.log(this.usr);
+                this.cargarEmpresas();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AutenticacionPage');
+   // //console.log('ionViewDidLoad AutenticacionPage');
   }
 
   solicitarPreguntas(){
@@ -55,14 +52,13 @@ export class AutenticacionPage {
       return;
     }
     let ar =  this.fecha.split("-");
-     let datof = ar[2]+"/"+ar[1]+"/"+ar[0];//"05/05/1984";//
-     //console.log(this.documento+" "+this.email+" "+datof);
+     let datof = ar[2]+"/"+ar[1]+"/"+ar[0];
      this.presentLoading("Varificando informacion.");
       this.auth.autenticar(this.documento,this.email,datof)
       .then((response) =>
         {
           this.loading.dismiss();
-          console.log(response['resp'].estado);
+          ////console.log(response['resp'].estado);
           if(response['resp'].estado == "NULL"){
             this.presentAlert("No existe coincidencia para los datos de usuario ingresados.");
           }
@@ -76,31 +72,28 @@ export class AutenticacionPage {
         .catch((error) =>
         {
           this.loading.dismiss();
-          //console.error('API Error : ', error.status);
-          //console.error('API Error : ', error);
           this.presentAlert("Se presento un inconveniente al procesar tu solicitud.");
         });
   }
 
   verificar(){
-    console.log(this.tmp.preg);
+    this.contador++;
     let validation = false;
     if(this.tmp.preg.length > 0){
       validation = true;
     }
     for(var i = 0 ; i < this.tmp.preg.length ; i++){
-      console.log(this.tmp.preg[i]);
+      //console.log(this.tmp.preg[i]);
       if(this.tmp.preg[i].VALOR != this.tmp.preg[i].resp){
         validation = false;
       }
     }
     if(validation){
-      this.presentToast("Verificacion exitosa.");
-      localStorage.setItem("user", JSON.stringify(this.resp));
-      this.navctl.setRoot('HomePage');
+      this.crearUsuario();
     }
     else{
-      this.presentAlert("Verificacion de usuario fallida, las respuestas no son correctas. ");
+      this.presentAlert("Verificacion de usuario fallida, las respuestas no son correctas. "+
+      "Numero de intentos "+this.contador+" de 3");
     }
   }
 
@@ -117,7 +110,15 @@ export class AutenticacionPage {
         title: 'Remuner',
         subTitle: 'Mensaje de solicitud',
         message: mensaje,
-        buttons: ['OK']
+        enableBackdropDismiss: false,
+        buttons: [ {
+          text: 'Aceptar',
+          handler: () => {
+            if(this.contador >= 3){
+              this.cambioTab();
+            }
+          }
+        }]
       });
 
       await alert.present();
@@ -131,9 +132,82 @@ export class AutenticacionPage {
     }
 
     back_action(){
-      this.navctl.setRoot('HomePage');
+      this.cambioTab();
     }
 
+    crearUsuario(){
+      this.presentLoading("Confirmando Respuestas.");
+      this.auth.activarUsr(this.email,this.documento,this.empresa)
+      .then((response) =>
+        {
+          this.loading.dismiss();
+          if(response['resp']['0'].VALOR == "Exito"){
+            this.showConfirm("Procedimiento con éxito, generamos un correo con la información de ingreso.");
+          }
+          else{
+            let detal = "";
+            if(response['resp']['0'].VALOR != undefined || response['resp']['0'].VALOR != null ){
+              detal = response['resp']['0'].DETALLE;
+              this.showConfirm("No fue posible realizar la activacion del usuario, motivo: '"+detal+"'.");
+            }
+            else{
+              this.presentAlert("Se presento un inconveniente al procesar tu solicitud.");
+            }
+          }
+        })
+        .catch((error) =>
+        {
+          this.loading.dismiss();
+          this.presentAlert("Se presento un inconveniente al procesar tu solicitud.");
+        });
+
+    }
+
+    showConfirm(mensaje) {
+      const confirm = this.alert.create({
+        title: 'Remuner',
+        message: mensaje,
+        buttons: [
+          {
+            text: 'Aceptar',
+            handler: () => {
+              this.cambioTab();
+            }
+          }
+        ]
+      });
+      confirm.present();
+    }
+
+    cambioTab(){
+      this.documento  = "";
+      this.email      = "";
+      this.empresa    = "";
+      this.preg       = false;
+      this.contador   = 0;
+      this.navctl.parent.select(0);
+    }
+
+   cargarEmpresas(){
+      this.presentLoading("Cargando...");
+      this.auth.getEmpresas(
+      ).then((response) =>
+      {
+        this.empresas   = [];
+        this.loading.dismiss();
+        if(response['resp'] == null){
+          this.presentAlert("No se encontraron empresas.");
+        }
+        else{
+          this.empresas = response['resp'];
+        }
+      })
+      .catch((error) =>
+      {
+        this.loading.dismiss();
+        this.presentAlert("Se presento un inconveniente al procesar  solicitud.");
+      });
+  }
 }
 
 

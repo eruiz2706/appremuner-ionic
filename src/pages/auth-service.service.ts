@@ -7,6 +7,7 @@ import { Http, RequestOptions, Headers } from "@angular/http";
 import { Injectable } from "@angular/core";
 import { FileOpener } from '@ionic-native/file-opener';
 import 'rxjs/add/operator/timeout';
+import CryptoJS from 'crypto-js';
 
 @Injectable()
 export class AuthServiceService {
@@ -31,16 +32,16 @@ export class AuthServiceService {
     let options = new RequestOptions({headers: headers});
     return new Promise((resolve, reject) => {
       this.http
-        .post("http://" + this.host + "/remuner/public/api/autenticar",body,options)
+        .post("http://" + this.host + "/remuner/public/api/auth",body,options)
         .timeout(this.numtime)
         .toPromise()
         .then(response => {
-          console.log("API Response : ", response.json());
+          //console.log("API Response : ", response.json());
           resolve(response.json());
         })
         .catch(error => {
-          console.error("API Error : ", error.status);
-          console.error("API Error : ", JSON.stringify(error));
+          //console.error("API Error : ", error.status);
+          //console.error("API Error : ", error);
           reject(error);
         });
     });
@@ -237,6 +238,97 @@ export class AuthServiceService {
     });
   }
 
+  public activarUsr(correo,documento,empresa) {
+    let body = {
+      usuario: correo,
+      version: "0.0.1",
+      documento: documento,
+      empresa: empresa,
+    };
+    let headers = new Headers({"Content-Type": "application/json"});
+    let options = new RequestOptions({headers: headers});
+    return new Promise((resolve, reject) => {
+      this.http
+        .post("http://" + this.host + "/remuner/public/api/register",body,options)
+        .timeout(this.numtime)
+        .toPromise()
+        .then(response => {
+          resolve(response.json());
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  public login(correo,empresa,clave) {
+    let body = {
+      usuario: correo,
+      version: "0.0.1",
+      empresa: empresa,
+      clave:CryptoJS.SHA256(clave).toString(CryptoJS.enc.Hex)
+    };
+    let headers = new Headers({"Content-Type": "application/json"});
+    let options = new RequestOptions({headers: headers});
+    return new Promise((resolve, reject) => {
+      this.http
+        .post("http://" + this.host + "/remuner/public/api/login",body,options)
+        .timeout(this.numtime)
+        .toPromise()
+        .then(response => {
+          resolve(response.json());
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  public valtoken(correo,token,empresa) {
+    let body = {
+      correo: correo,
+      version: "0.0.1",
+      empresa: empresa,
+      token:token
+    };
+    let headers = new Headers({"Content-Type": "application/json"});
+    let options = new RequestOptions({headers: headers});
+    return new Promise((resolve, reject) => {
+      this.http
+        .post("http://" + this.host + "/remuner/public/api/valtoken",body,options)
+        .timeout(this.numtime)
+        .toPromise()
+        .then(response => {
+          resolve(response.json());
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  public recuerar(correo,empresa) {
+    let body = {
+      correo: correo,
+      version: "0.0.1",
+      empresa: empresa,
+    };
+    let headers = new Headers({"Content-Type": "application/json"});
+    let options = new RequestOptions({headers: headers});
+    return new Promise((resolve, reject) => {
+      this.http
+        .post("http://" + this.host + "/remuner/public/api/recovery",body,options)
+        .timeout(this.numtime)
+        .toPromise()
+        .then(response => {
+          resolve(response.json());
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
   public confirmar_solicitud(token,documento,solicitud,tiposolicitud,fechaini,fechafin,tiempo) {
     let body = {
       token_app: token,
@@ -263,6 +355,7 @@ export class AuthServiceService {
         });
     });
   }
+
   public validaToken(token) {
     let body = {token_app: token,};
     let headers = new Headers({"Content-Type": "application/json"});
@@ -320,6 +413,24 @@ export class AuthServiceService {
       ]
     });
     confirm.present();
+  }
+
+  public getEmpresas() {
+    let body = {version: "0.0.1"};
+    let headers = new Headers({"Content-Type": "application/json"});
+    let options = new RequestOptions({headers: headers});
+    return new Promise((resolve, reject) => {
+      this.http
+        .post("http://" + this.host + "/remuner/public/api/empresas",body,options)
+        .timeout(this.numtime)
+        .toPromise()
+        .then(response => {
+          resolve(response.json());
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
   }
 
   public async presentToast(mensaje) {

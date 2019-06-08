@@ -1,3 +1,6 @@
+import { MainFunctions } from './../pages/util/MainFunctions';
+import { LoginPageModule } from './../pages/login/login.module';
+import { TabsPageModule } from './../pages/tabs/tabs.module';
 import { ModalcomprobantePageModule } from './../pages/modalcomprobante/modalcomprobante.module';
 import { HomePageModule } from './../pages/home/home.module';
 import { EducacionPageModule } from './../pages/educacion/educacion.module';
@@ -44,7 +47,9 @@ import { FileOpener } from '@ionic-native/file-opener';
     ComprobantePageModule,
     EducacionPageModule,
     HomePageModule,
-    ModalcomprobantePageModule
+    ModalcomprobantePageModule,
+    TabsPageModule,
+    LoginPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -60,7 +65,8 @@ import { FileOpener } from '@ionic-native/file-opener';
     File,
     FileTransfer,
     DocumentViewer,
-    FileOpener
+    FileOpener,
+    MainFunctions,
   ]
 })
 export class AppModule {}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { timer } from 'rxjs/observable/timer';
@@ -24,5 +24,6 @@ export class MyApp {
       timer(3000).subscribe(() => this.showSplash = false)
     });
   }
+
 }
 

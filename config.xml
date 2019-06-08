@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="co.com.remunerapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="co.com.remunerapp" version="1.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Remuner</name>
     <description>App para la autogestion</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <author email="hi@ionicframework" href="http://ionicframework.com/">victor.benjumea@vibeconsulting.com.co</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

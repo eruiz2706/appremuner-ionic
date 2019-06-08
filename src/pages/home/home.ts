@@ -1,3 +1,4 @@
+import { TabsPage } from './../tabs/tabs';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, MenuController, ToastController, LoadingController } from 'ionic-angular';
 import { AuthServiceService } from '../auth-service.service';
@@ -45,8 +46,7 @@ export class HomePage {
       this.detusr = false;
     }*/
   }
-
-
+  
   ionViewWillEnter() {
     if(this.auth.valitaSesion()){
       this.usr = this.auth.getUser();
@@ -61,7 +61,8 @@ export class HomePage {
   public  userDetail(){
     this.menu.close();
     if(!this.detusr){
-      this.navctl.push('AutenticacionPage');
+      //this.navctl.push('AutenticacionPage');
+      this.navctl.push('TabsPage');
     }
     else{
       this.navctl.push('UsuarioPage');
