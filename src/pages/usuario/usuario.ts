@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
 import { AuthServiceService } from '../auth-service.service';
 
 /**
@@ -17,9 +17,10 @@ import { AuthServiceService } from '../auth-service.service';
 export class UsuarioPage {
   usr: any;
 
-  constructor(public navCtrl: NavController,
+  constructor(public navctl: NavController,
               public navParams: NavParams,
-              public auth:AuthServiceService) {
+              public auth:AuthServiceService,
+              public toastController: ToastController) {
                 this.usr = this.auth.getUser();
   }
 
@@ -29,4 +30,31 @@ export class UsuarioPage {
   ionViewWillEnter() {
 
   }
+
+  async presentToast(mensaje) {
+    let toast = await this.toastController.create({
+      message: mensaje,
+      duration: 3000
+    });
+    toast.present();
+  }
+
+  public  redirectCambioClave(){
+    if(this.validateuser()){
+      this.navctl.push('CambioclavePage');
+    }
+  }
+
+  validateuser(){
+    if(!this.auth.valitaSesion()){
+      this.presentToast("Inicie una sesión para continuar..");
+      return false;
+    }
+    return true;
+  }
+
+  back_action() {
+    this.navctl.setRoot('HomePage');
+  }
+
 }

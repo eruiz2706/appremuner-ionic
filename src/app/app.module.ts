@@ -9,6 +9,10 @@ import { ComprobantePageModule } from './../pages/comprobante/comprobante.module
 import { CertificadoPageModule } from './../pages/certificado/certificado.module';
 import { AutenticacionPageModule } from './../pages/autenticacion/autenticacion.module';
 import { UsuarioPageModule } from './../pages/usuario/usuario.module';
+import { CambioclavePageModule } from './../pages/cambioclave/cambioclave.module';
+
+import { SolicitudSolicitantePageModule } from './../pages/solicitud-solicitante/solicitud-solicitante.module';
+import { SolicitudGestorPageModule } from './../pages/solicitud-gestor/solicitud-gestor.module';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -49,7 +53,10 @@ import { FileOpener } from '@ionic-native/file-opener';
     HomePageModule,
     ModalcomprobantePageModule,
     TabsPageModule,
-    LoginPageModule
+    LoginPageModule,
+    SolicitudSolicitantePageModule,
+    SolicitudGestorPageModule,
+    CambioclavePageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

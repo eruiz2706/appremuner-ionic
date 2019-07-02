@@ -454,4 +454,122 @@ export class AuthServiceService {
     return s.replace(/[^a-z0-9]/gi, '_').toLowerCase();
   }
 
+  public getVacacionesHistorial(token,usuario) {
+    let body = {
+      token_app: token,
+      usuario : usuario,
+      cliente : "",
+      version: "0.0.1"
+    };
+    let headers = new Headers({"Content-Type": "application/json"});
+    let options = new RequestOptions({headers: headers});
+    return new Promise((resolve, reject) => {
+      this.http
+        .post("http://" + this.host + "/remuner/public/api/vacacion_historial",body,options)
+        .timeout(this.numtime)
+        .toPromise()
+        .then(response => {
+          resolve(response.json());
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  public getVacacionPendiente(token,usuario) {
+    let body = {
+      token_app: token,
+      usuario : usuario,
+      cliente : "",
+      version: "0.0.1"
+    };
+    let headers = new Headers({"Content-Type": "application/json"});
+    let options = new RequestOptions({headers: headers});
+    return new Promise((resolve, reject) => {
+      this.http
+        .post("http://" + this.host + "/remuner/public/api/vacacion_pendiente",body,options)
+        .timeout(this.numtime)
+        .toPromise()
+        .then(response => {
+          resolve(response.json());
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  public getVacacionesEstado(token,usuario) {
+    let body = {
+      token_app: token,
+      usuario : usuario,
+      cliente : "",
+      version: "0.0.1"
+    };
+    let headers = new Headers({"Content-Type": "application/json"});
+    let options = new RequestOptions({headers: headers});
+    return new Promise((resolve, reject) => {
+      this.http
+        .post("http://" + this.host + "/remuner/public/api/vacacion_estado",body,options)
+        .timeout(this.numtime)
+        .toPromise()
+        .then(response => {
+          resolve(response.json());
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+  
+  public setApruebaSolicitud(token,usuario,id_novedad,id_estado) {
+    let body = {
+      token_app: token,
+      usuario : usuario,
+      id_novedad: id_novedad,
+			id_estado : id_estado,
+      version: "0.0.1"
+    };
+    let headers = new Headers({"Content-Type": "application/json"});
+    let options = new RequestOptions({headers: headers});
+    return new Promise((resolve, reject) => {
+      this.http
+        .post("http://" + this.host + "/remuner/public/api/apruebaSolicitud",body,options)
+        .timeout(this.numtime)
+        .toPromise()
+        .then(response => {
+          resolve(response.json());
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  public setActualizarClave(token,correo,documento,oldpass,newpass) {
+    let body = {
+      token_app: token,
+      correo : correo,
+      documento : documento,
+      oldpass: oldpass,
+			newpass : newpass,
+      version: "0.0.1"
+    };
+    let headers = new Headers({"Content-Type": "application/json"});
+    let options = new RequestOptions({headers: headers});
+    return new Promise((resolve, reject) => {
+      this.http
+        .post("http://" + this.host + "/remuner/public/api/actualizarClave",body,options)
+        .timeout(this.numtime)
+        .toPromise()
+        .then(response => {
+          resolve(response.json());
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
 }

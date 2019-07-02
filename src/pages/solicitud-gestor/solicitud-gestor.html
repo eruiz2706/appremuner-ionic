@@ -1,0 +1,55 @@
+
+<ion-content padding>
+   
+    <ion-list  scroll="true">
+     
+      <ion-item-sliding    #slidingItem *ngFor="let item of this.respHistorial; let indice=index">
+        <ion-item detail="true" lines="full" #ite (click)="openOption(slidingItem, ite)" >
+            <ion-label  text-wrap>
+                <p>
+                  <ion-row>
+                      <ion-col col-12>
+                        Empleado : {{item.EMPLEADO}}
+                      </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col col-6>
+                          Vacacion Id : {{item.VACATION_ID}}
+                      </ion-col>
+                      <ion-col col-6>
+                        Estado : {{item.ESTADO}}
+                      </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col col-6>
+                        Fecha Inicial : {{item.FECHA_INICIAL}}
+                      </ion-col>
+                      <ion-col col-6>
+                        Dias : {{sumaDias(item.DISFRUTADO,item.COMPENSADO)}}
+                      </ion-col>
+                  </ion-row>
+                  <!--<ion-row>
+                      <ion-col col-6>
+                        Fecha Final : {{item.FECHA_FINAL}}
+                      </ion-col>
+                      <ion-col col-6>
+                        Compensado : {{item.COMPENSADO}}
+                      </ion-col>
+                  </ion-row>-->
+                </p>
+            </ion-label>
+        </ion-item> 
+        <ion-item-options side="bottom">
+          <button ion-button (click)="guardar(item.VACATION_ID,'39524',indice);" color="danger">
+            <ion-icon name="thumbs-down"></ion-icon>  
+            Rechazar
+          </button>
+          <button ion-button (click)="guardar(item.VACATION_ID,'32433',indice);" color="primary">
+            <ion-icon name="thumbs-up"></ion-icon>
+            Aprobar
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+ 
+</ion-content>

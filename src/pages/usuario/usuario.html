@@ -6,9 +6,14 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>usuario</ion-title>
-  </ion-navbar>
+    <ion-toolbar>
+        <ion-buttons left>
+            <button ion-button icon-only (click)="back_action();" >
+              <ion-icon  color="primary" name='arrow-round-back'></ion-icon>
+            </button>
+          </ion-buttons>
+      <ion-title>Usuario</ion-title>
+    </ion-toolbar>
 
 </ion-header>
 
@@ -37,6 +42,12 @@
                 <h2>Codigo</h2>
                 <p color="primary" >{{this.usr == undefined ? "" : this.usr.user.ID}}</p>
             </ion-label>
+        </ion-item>
+        <ion-item lines="full">
+            <button ion-button color="primary"  (click)="redirectCambioClave()" >
+                <ion-icon name="key"></ion-icon>
+                 Cambiar clave
+            </button>
         </ion-item>
       </ion-list>
 </ion-content>

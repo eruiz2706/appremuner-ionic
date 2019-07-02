@@ -1,0 +1,53 @@
+<!--
+  Generated template for the CambioclavePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-toolbar>
+        <ion-buttons left>
+            <button ion-button icon-only (click)="back_action();" >
+              <ion-icon  color="primary" name='arrow-round-back'></ion-icon>
+            </button>
+          </ion-buttons>
+      <ion-title>Cambio clave</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+    <ion-content padding>
+      <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-label>Clave actual</ion-label>
+            </ion-col>
+            <ion-col style="border-bottom: .01em solid #dcdcdc">
+              <ion-input  [(ngModel)]="claveActual" type="password"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-label>Nueva Clave</ion-label>
+            </ion-col>
+            <ion-col style="border-bottom: .01em solid #dcdcdc">
+                <ion-input  [(ngModel)]="nuevaClave" type="password"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-label>Confirmar Clave</ion-label>
+            </ion-col>
+            <ion-col style="border-bottom: .01em solid #dcdcdc">
+                <ion-input  [(ngModel)]="confirmClave" type="password"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <button ion-button color="primary"  (click)="actualizar()" >
+              <ion-icon name="key"></ion-icon>
+                Actualizar
+            </button>
+          </ion-row>
+         </ion-grid>
+  </ion-content>
+  
