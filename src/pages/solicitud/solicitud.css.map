@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAEE,cAFY,CAEZ,UAAU,CAAC;EACT,OAAO,EAAE,WAAW;EACpB,OAAO,EAAE,YAAY;EACrB,OAAO,EAAE,WAAW;EACpB,OAAO,EAAE,IAAI;EACb,QAAQ,EAAE,MAAM;EACf,SAAS,EAAE,cAAc;CAC7B",
+    "sources": [
+        "solicitud.scss"
+    ],
+    "names": [],
+    "file": "solicitud.css"
+}
